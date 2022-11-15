@@ -1,7 +1,9 @@
 # jemdoc: menu{MENU}{index.html}, showsource
 == Projects
 
-=== [A_Geometric_Introduction_to_Lie_Theory.pdf A Geometric Introduction to Lie Theory]
+=== A Geometric Introduction to Lie Theory
+[A_Geometric_Introduction_to_Lie_Theory.pdf PDF]
+
 Provides an intuitive, visual introduction to Lie theory though the motivating example of rigid-body motion. Illustrations and HTML version incoming...
 
 === [https://github.com/alvinzz/named_tensors Named Tensors]
