@@ -1,0 +1,75 @@
+# jemdoc: menu{MENU}{index.html}, showsource
+= Alvin Zhang
+
+~~~
+{}{img_left}{images/sfm_failure.png}{Test}{350}{}{}
+
+Research Engineer, [http://matician.com Matician]
+
+Github: [https://github.com/alvinzz]
+
+Email: alvn.zng \[at\] gmail
+~~~
+
+== About
+I am a currently a research engineer at [http://matician.com Matician], working on perception for autonomous robots.
+
+Over the past summer, I worked with [https://redwood.berkeley.edu/people/bruno-olshausen/ Dr. Bruno Olshausen] in the [https://redwood.berkeley.edu Redwood Center for Theoretical Neuroscience] at UC Berkeley.
+
+Previously, I recieved a B.Sc. in Electrical Engineering and Computer Science from UC Berkeley.
+
+== Goals
+I am currently seeking a Ph.D. candidacy in Computer Vision or Robotics.
+
+== Research Interests
+Computer Vision
+ - Incorporate rich neural priors into systems that enforce geometric self-consistency.
+ - Optimize for unsupervised objectives during inference, not just in training.
+
+Robotics
+ - Learn actionable representations of an agent’s state, including its external environment.
+ - Experimentally evaluate research on real-world robotic systems to demonstrate robustness.
+
+== Research Statement
+In classical control theory, a closed-loop system incorporates (possibly noisy or incomplete) sensor feedback from its
+surroundings to perform state estimation and plan a control trajectory. Despite recent advances in neural-network-based
+perception and control, classical closed-loop control remains the /de facto/ standard for robotic systems in industrial
+settings due to its robustness.
+
+I believe that the key idea of classical closed-loop control which provides this robustness is that it *solves an
+optimization problem at run-time*. Conceptually, this implies that:
+ . The system self-corrects its behavior or internal state based on external observations. 
+ . The objective function provides a metric for performance. Thus, if its internal state estimate
+disagrees with observations, or the cost of a control trajectory is excessively high, the system can stop itself or
+request human intervention to prevent injury.
+ . The system’s performance scales favorably with additional compute time.
+
+Despite these advantages, control-theoretic approaches remain restricted to domains where the state-transition and
+observation models are known. This limits their application to sufficiently complex problems: in particular, it has
+proven difficult to develop models for contact dynamics (e.g., grasping) and vision.
+
+On the other hand, neural approaches to perception and control have demonstrated remarkable success in these domains.
+However, in such systems, optimization is limited to training-time. This means that such systems cannot leverage the
+benefits of the control-theoretic approach, especially points 2) and 3). For example, RAFT is an iterative neural
+network for predicting optical flow. Yet, if a green pixel is matched to a red one at the end of inference, the network
+happily terminates and returns an incorrect result.
+
+This shortcoming greatly limits the application of neural approaches to real-world scenarios: despite having
+state-of-the-art performance in *average* scenarios, they may perform catastrophically, without warning, in
+“out-of-domain” or “adversarial” environments.
+
+This suggests to design “closed-loop neural inference” systems which
+ . Perform optimization during inference;
+ . Maintain internal consistency with external observations.
+
+NeRF is a promising recent work in this direction: a neural network is trained to implicitly represent a 3-D scene by
+enforcing consistency between posed camera images and volumetrically rendered views. However, the neural network must
+be re-trained for each scene, a days-long process, and information cannot be re-used between scenes. Later works
+(Plenoxels, Instant-NGP, NICE-SLAM) show that using tiny (or even no) neural networks and directly optimizing features
+over a 3-D volume produce similar results in mere seconds. Thus, I would argue that NeRF does not fully leverage the
+learning and general function approximation capabilities of neural networks.
+
+This observation drives my "Research Interests", outlined above.
+
+== Publications
+A. Zhang, "Generalized Skill Learning, Safety, and Exploration with Flow-Based Models", Workshop on Task-Agnostic Reinforcement Learning, International Conference on Learning Representations, 2019.

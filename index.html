@@ -1,1 +1,104 @@
-Hello World
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Alvin Zhang</title>
+</head>
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">Alvin Zhang</div>
+<div class="menu-item"><a href="index.html" class="current">About</a></div>
+<div class="menu-item"><a href="cv.html">CV</a></div>
+<div class="menu-item"><a href="projects.html">Projects</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Alvin Zhang</h1>
+</div>
+<table class="imgtable"><tr><td>
+<img src="images/sfm_failure.png" alt="Test" width="350px" />&nbsp;</td>
+<td align="left"><p>Research Engineer, <a href="http://matician.com">Matician</a></p>
+<p>Github: <a href="https://github.com/alvinzz">https://github.com/alvinzz</a></p>
+<p>Email: alvn.zng [at] gmail</p>
+</td></tr></table>
+<h2>About</h2>
+<p>I am a currently a research engineer at Matician, working on perception for autonomous robots.</p>
+<p>Over the past summer, I worked with Dr. Bruno Olshausen in the Redwood Center for Theoretical Neuroscience at UC Berkeley.</p>
+<p>Previously, I recieved a B.Sc. in Electrical Engineering and Computer Science from UC Berkeley.</p>
+<h2>Goals</h2>
+<p>I am currently seeking a Ph.D. candidacy in Computer Vision or Robotics.</p>
+<h2>Research Interests</h2>
+<p>Computer Vision</p>
+<ul>
+<li><p>Incorporate rich neural priors into systems that enforce geometric self-consistency.</p>
+</li>
+<li><p>Optimize for unsupervised objectives during inference, not just in training.</p>
+</li>
+</ul>
+<p>Robotics</p>
+<ul>
+<li><p>Learn actionable representations of an agent’s state, including its external environment.</p>
+</li>
+<li><p>Experimentally evaluate research on real-world robotic systems to demonstrate robustness.</p>
+</li>
+</ul>
+<h2>Research Statement</h2>
+<p>In classical control theory, a closed-loop system incorporates (possibly noisy or incomplete) sensor feedback from its
+surroundings to perform state estimation and plan a control trajectory. Despite recent advances in neural-network-based
+perception and control, classical closed-loop control remains the <i>de facto</i> standard for robotic systems in industrial
+settings due to its robustness.</p>
+<p>I believe that the key idea of classical closed-loop control which provides this robustness is that it <b>solves an
+optimization problem at run-time</b>. Conceptually, this implies that:</p>
+<ol>
+<li><p>The system self-corrects its behavior or internal state based on external observations. </p>
+</li>
+<li><p>The objective function provides a metric for performance. Thus, if its internal state estimate
+disagrees with observations, or the cost of a control trajectory is excessively high, the system can stop itself or
+request human intervention to prevent injury.</p>
+</li>
+<li><p>The system’s performance scales favorably with additional compute time.</p>
+</li>
+</ol>
+<p>Despite these advantages, control-theoretic approaches remain restricted to domains where the state-transition and
+observation models are known. This limits their application to sufficiently complex problems: in particular, it has
+proven difficult to develop models for contact dynamics (e.g., grasping) and vision.</p>
+<p>On the other hand, neural approaches to perception and control have demonstrated remarkable success in these domains.
+However, in such systems, optimization is limited to training-time. This means that such systems cannot leverage the
+benefits of the control-theoretic approach, especially points 2) and 3). For example, RAFT is an iterative neural
+network for predicting optical flow. Yet, if a green pixel is matched to a red one at the end of inference, the network
+happily terminates and returns an incorrect result.</p>
+<p>This shortcoming greatly limits the application of neural approaches to real-world scenarios: despite having
+state-of-the-art performance in <b>average</b> scenarios, they may perform catastrophically, without warning, in
+“out-of-domain” or “adversarial” environments.</p>
+<p>This suggests to design “closed-loop neural inference” systems which</p>
+<ol>
+<li><p>Perform optimization during inference;</p>
+</li>
+<li><p>Maintain internal consistency with external observations.</p>
+</li>
+</ol>
+<p>NeRF is a promising recent work in this direction: a neural network is trained to implicitly represent a 3-D scene by
+enforcing consistency between posed camera images and volumetrically rendered views. However, the neural network must
+be re-trained for each scene, a days-long process, and information cannot be re-used between scenes. Later works
+(Plenoxels, Instant-NGP, NICE-SLAM) show that using tiny (or even no) neural networks and directly optimizing features
+over a 3-D volume produce similar results in mere seconds. Thus, I would argue that NeRF does not fully leverage the
+learning and general function approximation capabilities of neural networks.</p>
+<p>This informs my &ldquo;Research Interests&rdquo; outlined above.</p>
+<h2>Publications</h2>
+<p>A. Zhang, &ldquo;Generalized Skill Learning, Safety, and Exploration with Flow-Based Models&rdquo;, Workshop on Task-Agnostic Reinforcement Learning, International Conference on Learning Representations, 2019.</p>
+<div id="footer">
+<div id="footer-text">
+Page generated 2022-11-14 15:59:41 PST, by <a href="http://jemdoc.jaboc.net/">jemdoc</a>.
+(<a href="index.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>
