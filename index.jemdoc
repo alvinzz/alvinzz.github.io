@@ -19,16 +19,145 @@ Over the past summer, I worked with [https://redwood.berkeley.edu/people/bruno-o
 Previously, I recieved a B.Sc. in Electrical Engineering and Computer Science from UC Berkeley.
 
 == Goals
-I am currently seeking a Ph.D. candidacy in Computer Vision or Robotics.
+I am seeking a Ph.D. in Computer Vision or Robotics.
 
 == Research Interests
-Computer Vision
- - Incorporate rich neural priors into systems that enforce geometric self-consistency.
- - Optimize for unsupervised objectives during inference, not just in training.
+=== Perception
+Self-supervision through self-consistency is a rich signal for *training* neural networks.
+Can these objectives also be optimized *during test-time inference*?
 
-Robotics
- - Learn actionable representations of an agent’s state, including its external environment.
- - Experimentally evaluate research on real-world robotic systems to demonstrate robustness.
+~~~
+{}{raw}
+<div class="wrap-collabsible">
+  <input id="collapsible" class="toggle" type="checkbox">
+  <label for="collapsible" class="lbl-toggle">Why?</label>
+  <div class="collapsible-content">
+    <div class="content-inner">
+      <p>
+        A system that <b>incorporates sensory feedback to solve an optimization problem at run-time</b> has three key properties:
+      </p>  
+      <ol>
+        <li>The system self-corrects its behavior or internal state based on external observations.</li>
+        <li>The system has a metric for performance, provided by the objective function.</li>
+        <li>The system's performance improves with additional compute.</li>
+      </ol>
+      <p>
+        Property <b>2</b> has important implications for robustness and safety:
+        if a system's internal state estimate disagrees with observations,
+        or the cost of a control trajectory is excessively high, the system can
+        stop itself and request human intervention.
+      </p>
+      <p>
+        Turning neural networks into closed-loop systems may help them to match the reliability of classical closed-loop control,
+        which remains the <i>de facto</i> standard in industry despite recent advances in deep learning.
+      </p>
+    </div>
+  </div>
+</div>
+~~~
+
+~~~
+{}{raw}
+<div class="wrap-collabsible">
+  <input id="collapsible2" class="toggle" type="checkbox">
+  <label for="collapsible2" class="lbl-toggle">How?</label>
+  <div class="collapsible-content">
+    <div class="content-inner">
+      <p>
+        <b>RAFT</b> is an iterative learned method for estimating optical flow.
+        During test-time, inference is done by recursively applying a learned update operator to the flow estimate.
+      </p>
+      <p>
+        However, it cannot incorporate feedback: if a red pixel is matched to a green one at the end of inference,
+        the network can only return that incorrect result.
+      </p>
+      <p>
+        I propose to directly optimize the flow estimate on a unsupervised objective (such as photometric error) during the inference
+        process. This may be alternated with the learned update step or used on-line to tune the weights of the network for a particular video.
+      </p>
+      <br>
+      <p>
+        <b>NeRF</b> trains a neural network to implicitly represent a 3-D scene, so that volumetric renderings of the scene are consistent with observations (posed camera images).
+      </p>  
+      <p>
+        In this sense, NeRF is robust because it knows if its scene representation is poor. However, learning does not transfer across scenes, which makes inference slow.
+      </p>
+      <p>
+        This suggests that priors can be used to speed up inference. This would also improve 3-D modelling in the sparse-view case, or in scenarios with noisy poses.
+      </p>
+      <p>
+        These priors could come in the form of
+        <ol>
+          <li>Known geometric priors, such as edge sparsity. (Related work: Plenoxels, Compressed Sensing MRI, NeRS, RegNeRF).</li>
+          <li>Learned image-based priors, such as estimated depth. (Related work: PixNeRF, MonoSDF, RegNeRF).</li>
+          <li>Learned 3-D priors via generative models. (Related work: AutoSDF, GIRAFFE).</li>
+        </ol>
+        For this <b>3</b>rd category of priors, I propose exploring conditional diffusion networks as generative models.
+      </p>
+    </div>
+  </div>
+</div>
+~~~
+
+=== Robotics
+Can we use *touch and proprioception* to develop *actionable and observationally consistent representations* for robotic behavior?
+
+~~~
+{}{raw}
+<div class="wrap-collabsible">
+  <input id="collapsible3" class="toggle" type="checkbox">
+  <label for="collapsible3" class="lbl-toggle">Why?</label>
+  <div class="collapsible-content">
+    <div class="content-inner">
+      <p>
+        Robots are different from computers because they <b>interact with the physical world</b>.
+      </p>
+      <p>
+        Yet, touch, our fundamental sense for interacting with the world, has been overlooked in robotics research.
+      </p>
+      <p>
+        A robot needs to ground its visual observations via touch and proprioception to ensure that its
+        mental model of the world remains consistent with reality.
+      </p>
+      <p>
+        If there is a mismatch between visual and haptic feedback,
+        the robot can then adjust its world model and its actions to reflect greater uncertainty, exercise more caution, and seek new information.
+      </p>
+      <p>
+        Over the long term, it can also use this difference to update its learned perception module in a self-supervised manner.
+        This will then allow the robot to exhibit more robust and adaptive behavior in novel environments.
+      </p>
+    </div>
+  </div>
+</div>
+~~~
+
+~~~
+{}{raw}
+<div class="wrap-collabsible">
+  <input id="collapsible4" class="toggle" type="checkbox">
+  <label for="collapsible4" class="lbl-toggle">How?</label>
+  <div class="collapsible-content">
+    <div class="content-inner">
+      <p>
+        <b>NeRF</b> introduced a neural representation which enforces multi-view <b>visual</b> consistency. However, as mentioned above, a system that interacts with the real world also needs to incorporate touch.
+      </p>
+      <p>
+        I propose to extend this framework to additionally <b>enforce haptic and proprioceptive constraints</b>. This should also be used to <b>guide behavior</b> if the state estimate has high error.
+        (Related work: Cross-Modal Supervision, Perception-aware Path Planning).
+      </p>
+      <br>
+      <p>
+        In addition, NeRF is optimized for photometric consistency. Such pixel-level detail is rarely needed for robotic tasks, making NeRF too expensive to run on-device in a real-time system.
+      </p>
+      <p>
+        Instead, I propose to distill NeRF's volumetric representation into a task-specific, actionable representation. (Related work: Denoised MDPs, Curiousity-Driven Exploration by Self-supervised Prediction, "Visual attention prediction improves performance of
+autonomous drone racing agents").
+      </p>
+    </div>
+  </div>
+</div>
+~~~
 
 == Projects
 See my [projects.html Projects] page.
