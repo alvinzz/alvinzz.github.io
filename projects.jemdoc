@@ -19,3 +19,10 @@ Use the principle of wavelet sparsity (used in MRI tomography) to aid volumetric
 Work done with Professor Bruno Olshausen at the Redwood Center for Theoretical Neuroscience at UC Berkeley.
 
 Demonstrate "explaining away" of parts in terms of wholes through the dynamics of inference in an artifical generative model.
+
+=== Generalized Skill Learning, Safety, and Exploration with Flow-Based Models
+[https://tarl2019.github.io/assets/papers/zhang2019generalized.pdf \[link\]]
+
+Single-author paper, published at the ICLR 2019 Workshop on "Task-Agnostic Reinforcement Learning".
+
+Show an Ant learning to perform flips and jumps from an unsupervised exploration algorithm!
