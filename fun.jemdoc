@@ -1,0 +1,30 @@
+# jemdoc: menu{MENU}{index.html}, showsource
+== Projects (Fun)
+
+=== Weathering with Moo
+[https://alvinzz.github.io/cs184-project/html/final.html \[link\]]
+
+~~~
+{}{img_left}{files/weathering_with_moo_icon.png}{}{100}{}{}
+~~~
+
+Class project for UC Berkeley's CS 184 - Computer Graphics.
+
+=== Fun with Homographies
+[files/fun_with_homographies.pdf \[link\]]
+
+~~~
+{}{img_left}{files/homography_fun_icon.png}{}{100}{}{}
+~~~
+
+Class project for UC Berkeley's CS 280 - Computer Vision.
+
+=== Drawyer
+[https://petsawyer.wixsite.com/drawyer \[link\]]
+
+~~~
+{}{img_left}{files/drawyer_icon.png}{}{100}{}{}
+~~~
+
+Class project for UC Berkeley's EECS 106A - Introduction to Robotics.
+

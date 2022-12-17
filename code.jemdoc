@@ -1,0 +1,10 @@
+# jemdoc: menu{MENU}{index.html}, showsource
+== Code Libraries
+
+=== [https://github.com/alvinzz/named_tensors Named Tensors]
+PyTorch Library - Supports named dimensions for multidimensional arrays. Reduces code ambiguity; enables better debugging and
+run-time checks. Provides more functionality than PyTorch’s native implementation.
+
+=== [https://github.com/alvinzz/safe_transforms Type-Safe Coordinate Transforms]
+Rust Crate - Implements type-safety for transforms between coordinate systems: projecting a point in coordinate frame A
+into camera B will raise a compile-time error.
